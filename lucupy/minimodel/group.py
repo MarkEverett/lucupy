@@ -7,14 +7,14 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from datetime import timedelta
 from enum import Enum, auto
-from typing import Final, FrozenSet, List, Optional, Callable
+from typing import Final, FrozenSet, List, Optional, Callable, Set
 
 from lucupy.helpers import flatten
 from lucupy.minimodel.constraints import Constraints
 from lucupy.minimodel.ids import (GroupID, ObservationID, ProgramID,
                                   UniqueGroupID)
 from lucupy.minimodel.obs_filter import obs_is_not_inactive, obs_is_science_or_progcal
-from lucupy.minimodel.observation import Observation, ObservationClass, Priority, Band
+from lucupy.minimodel.observation import Observation, ObservationClass, Priority, Band, CalibrationRole
 from lucupy.minimodel.resource import Resources
 from lucupy.minimodel.site import Site
 from lucupy.minimodel.wavelength import Wavelengths
@@ -410,6 +410,8 @@ class Group(BaseGroup):
     group_option: AndOption
     previous: Optional[int] = None
     parent_index: Optional[int] = None
+    calibration_role: Optional[CalibrationRole] = None
+    system_group: Optional[bool] = False
 
     def __post_init__(self):
         super().__post_init__()

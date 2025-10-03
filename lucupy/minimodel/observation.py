@@ -32,7 +32,26 @@ __all__ = [
     'ObservationStatus',
     'Priority',
     'SetupTimeType',
+    'CalibrationRole',
 ]
+
+
+@final
+class CalibrationRole(Enum):
+    """
+    The calibration role of an observation, from GPP.
+
+    Members:
+        - NONE
+        - TWILIGHT
+        - PHOTOMETRIC
+        - SPECTROPHOTOMETRIC
+        - TELLURIC
+    """
+    TWILIGHT = auto()
+    PHOTOMETRIC = auto()
+    SPECTROPHOTOMETRIC = auto()
+    TELLURIC = auto()
 
 
 @final
@@ -193,6 +212,7 @@ class Observation:
     too_type: Optional[TooType] = None
     preimaging: bool = False
     band: Optional[Band] = None
+    calibration_role: CalibrationRole = None
 
 
     @property
